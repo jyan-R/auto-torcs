@@ -65,6 +65,14 @@ class torcs:
         print(text)
         args.append(text)
         result.append(args)
+        
+    def exit_race(self):
+        print("race failed, trying to exit...\n")
+        win32api.keybd_event(0x1B, 0, 0, 0)
+        win32api.keybd_event(0x1B, 0, win32con.KEYEVENTF_KEYUP, 0)
+        time.sleep(0.2)
+        self.process = [self.abandon]
+        self.click
 
 
 
