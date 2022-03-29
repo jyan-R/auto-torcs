@@ -10,7 +10,7 @@ from PIL import Image
 
 Y_OFFSET = 15
 result = []
-#test
+#testtest
 class torcs:
     def __init__(self, classname, filename):
 
