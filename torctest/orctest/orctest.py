@@ -1,6 +1,4 @@
-#-*-coding:GBK -*-
 import time
-from numpy.core.numeric import False_
 import win32gui
 import win32ui
 import win32api
@@ -44,12 +42,11 @@ class torcs:
 
     def reconfig(self, retype = False, retype_num = 1, reconfig_num = 1):
         self.process = [self.config_race, self.accept]
-        if(not retype):
-            for i in range(reconfig_num):
-                self.process.insert(1, self.newtrack)
-        else:
+        if(retype):
             for i in range(retype_num):
-                self.process.insert(1, self.newtype)
+                self.process.insert(1, self.newtrack)
+        for i in range(reconfig_num):
+            self.process.insert(-1, self.newtype)
         self.click()
 
     def nextrace(self):
@@ -66,8 +63,8 @@ class torcs:
         get_windows(self.handle, self.totalTE, './test.png')
         text = pytesseract.image_to_string(Image.open("./test.png"),lang="eng")
         print(text)
-        para = args.append(text)
-        result.append(para)
+        args.append(text)
+        result.append(args)
 
 
 
