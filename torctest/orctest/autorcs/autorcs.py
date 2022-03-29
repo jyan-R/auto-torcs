@@ -8,12 +8,16 @@ import numpy as np
 import pandas as pd
 from PIL import Image
 
+import loader
+
 Y_OFFSET = 15
 
 class torcs:
-    def __init__(self, filename, classname = 'GLUT'):
+    def __init__(self, filepath, classname = 'GLUT'):
 
-        self.handle = win32gui.FindWindow(classname, filename)
+        self.handle = win32gui.FindWindow(classname, filepath)
+        self.filepath = filepath
+        loader.loaddir(filepath)
         self.loc = _win_findloc(self.handle)
         self.race = (327, 96)
         self.cruise = (327, 96)
@@ -40,13 +44,20 @@ class torcs:
         time.sleep(13) # decided by specific tracks
         self.get_grade(list(args))
 
-    def reconfig(self, retype = False, retype_num = 1, reconfig_num = 1):
+    def newtrack(self, ntrack):
+        ptrack = loader.now_track(self.filepath)
+        p = loader.get_track_num(ptrack)
+        n = loader.get_track_num(ntrack)
+        self._reconfig(n[0]-p[0], n[1]-p[1])
+
+    def _reconfig(self, road_num = 1, track_num = 1):
         self.process = [self.config_race, self.accept]
-        if(retype):
+        if (road_num != 0):
             for i in range(retype_num):
-                self.process.insert(1, self.newtrack)
-        for i in range(reconfig_num):
-            self.process.insert(-1, self.newtype)
+                self.process.insert(1, self.newtype)
+        if (track_num != 0):
+            for i in range(reconfig_num):
+                self.process.insert(-1, self.newtrack)
         self.click()
 
     def nextrace(self):
@@ -73,6 +84,10 @@ class torcs:
         time.sleep(0.2)
         self.process = [self.abandon]
         self.click
+
+    def saveresult(tcls, filepath = 'test.csv'):
+        df1 = pd.DataFrame(result)
+        df1.to_csv('test.csv', index = False, header = False)
 
 
 
@@ -110,13 +125,4 @@ def _get_windows(handle, loc, filename):
     saveDC.SelectObject(saveBitmap)
     saveDC.BitBlt((0,0), (width, height), newhdDC, (left, top), win32con.SRCCOPY)
     saveBitmap.SaveBitmapFile(saveDC, filename)
-
-def saveresult(tcls, filepath = 'test.csv'):
-    df1 = pd.DataFrame(result)
-    df1.to_csv('test.csv', index = False, header = False)
-
-
-
-
-
 
