@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>2b32c439-422b-40e8-b085-a8f50c91e819</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>orctest.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="orctest.py" />
+    <Compile Include="autorcs\__init__.py" />
+    <Compile Include="autorcs\autorcs.py" />
+    <Compile Include="main.py" />
+    <Compile Include="config.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="autorcs\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
