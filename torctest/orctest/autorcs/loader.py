@@ -16,11 +16,12 @@ def now_track(torcspath):
     select = select.getElementsByTagName("section")
     select = select[0].getElementsByTagName("attstr")
 
-    track = select[1].getAttribute("val")
+    track = select[0].getAttribute("val")
     return track
 
 def loaddir(filepath):
 
+    filepath += '/tracks'
     roadlist = os.listdir(filepath)
 
     with open('./track.txt','w+') as f:
@@ -32,16 +33,17 @@ def loaddir(filepath):
 
 def get_track_num(name):
 
+    print(name)
     tracklist = []
     with open('./track.txt','r') as f:
         for line in f:
             tracklist.append(line[:-1].split(','))
 
     for track in tracklist:
+        print(track)
         if name == track[0]:
-            return track[1:]
-        else:
-            raise KeyError('track name not found')
+            return int(track[1]), int(track[2])
+    raise KeyError('track name not found')
 
 #track_num('dirt-1')
 #loaddir(r"D:\#作业、pre\大二下 控制导论\CyberTORCS_2022Spring_V2.0_Publish\CyberTORCS_2022Spring_V2.0_Publish\tracks")

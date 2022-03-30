@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>2b32c439-422b-40e8-b085-a8f50c91e819</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>./autorcs/loader.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
